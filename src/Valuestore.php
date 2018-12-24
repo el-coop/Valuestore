@@ -46,11 +46,11 @@ class Valuestore {
 		file_put_contents($this->fileName, json_encode($values));
 	}
 
-	public function get(string $name) {
+	public function get(string $name, $default = null) {
 		$all = $this->all();
 		if (isset($all[$name])) {
 			return $all[$name];
 		}
-		throw new \Exception('Setting ' . $name . ' is missing');
+		return $default;
 	}
 }
