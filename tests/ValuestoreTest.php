@@ -64,10 +64,16 @@ class ValuestoreTest extends TestCase {
 		$valuestore->put(5, true);
 	}
 
-	public function test_get_exeption_when_get_name_doesnt_exist(){
+	public function test_get_null_when_get_name_doesnt_exist_and_no_default(){
 		$valuestore = new Valuestore($this->file);
-		$this->expectExceptionMessage('Setting test is missing');
-		$valuestore->get('test');
+		$get = $valuestore->get('test');
+		$this->assertEquals(null,$get);
+	}
+
+	public function test_get_default_when_get_name_doesnt_exist_and_given_default(){
+		$valuestore = new Valuestore($this->file);
+		$get = $valuestore->get('test','value');
+		$this->assertEquals('value',$get);
 	}
 
 	public function test_get_gets_value_with_correct_input() {
